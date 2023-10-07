@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import '../../style/style.css';
-import { useFormik } from 'formik';
+import { useFormik, withFormik } from 'formik';
 import { UserSignIn, UserSignUp, signinActionApi, signupActionApi } from '../../redux/reducers/userReducder';
 import { useDispatch, useSelector } from 'react-redux';
 import { DispatchType, RootState } from '../../redux/store';
@@ -8,9 +8,9 @@ import { history } from '../..';
 import * as Yup from 'yup'
 import '../Login/Login.css'
 import { UserOutlined,FacebookOutlined,GoogleOutlined  } from '@ant-design/icons';
-import {Button} from 'antd';
+import {Button, Space} from 'antd';
 import { createFromIconfontCN } from '@ant-design/icons';
-import { Space } from 'antd';
+
 
 const IconFont = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
@@ -70,18 +70,18 @@ const Register = (props: Props) => {
     onSubmit: (values: UserSignIn) => {
       const action = signinActionApi(values);
       dispatch(action)
-
+      history.push('/home');
     }
 
   })
-  useEffect(() => {
-    if (isRegistered) {
+  // useEffect(() => {
+  //   if (isRegistered) {
 
-      document.querySelectorAll<HTMLInputElement>('.form-container input').forEach((input) => {
-        input.value = '';
-      });
-    }
-  }, [isRegistered, register]);
+  //     document.querySelectorAll<HTMLInputElement>('.form-container input').forEach((input) => {
+  //       input.value = '';
+  //     });
+  //   }
+  // }, [isRegistered, register]);
 
   // useEffect(() => {
   //   if (userSignIn?.maLoaiNguoiDung === 'GV') {
@@ -120,28 +120,13 @@ const Register = (props: Props) => {
       <div style={{ marginTop: '120px' }} className='container ' id='container' ref={containerRef}>
         <div className='form-container sign-up-container '>
           <form onSubmit={register.handleSubmit}>
-            <h1>Tạo Tài Kkhoản</h1>
+            <h1>Tạo Tài Khoản</h1>
             <input type='email' id='emmail' name='email' placeholder='Email' ref={signUpEmailRef} onChange={register.handleChange} />
             {register.errors.email && register.touched.email ? <div className='errorMessage'>{register.errors.email}</div> : <div className='message'></div>}
             <input type='text' placeholder='Name' id='name' name='name' onChange={register.handleChange} />
             {register.errors.name && register.touched.name ? <div className='errorMessage'>{register.errors.name}</div> : <div className='message'></div>}
             <input type='text' placeholder='Phone' id='soDT' name='soDT' onChange={register.handleChange} />
             {register.errors.soDT && register.touched.soDT ? <div className='errorMessage'>{register.errors.soDT}</div> : <div className='message'></div>}
-            {/* <select id="" className=''
-              onChange={register.handleChange}
-              name='maNhom'
-              value={register.values.maNhom}>
-              <option value="GP01">GP01</option>
-              <option value="GP02">GP02</option>
-              <option value="GP03">GP03</option>
-              <option value="GP04">GP04</option>
-              <option value="GP05">GP05</option>
-              <option value="GP06">GP06</option>
-              <option value="GP07">GP07</option>
-              <option value="GP08">GP08</option>
-              <option value="GP09">GP09</option>
-              <option value="GP010">GP010</option>
-            </select> */}
             <input type='password' placeholder='Password' id='password' name='password' onChange={register.handleChange} />
             {register.errors.password && register.touched.password ? <div className='errorMessage'>{register.errors.password}</div> : <div className='message'></div>}
             <button type='submit'>Đăng Ký</button>

@@ -99,7 +99,7 @@ export const signupActionApi = (userSignUp: UserSignUp) => {
 
             const action: PayloadAction<UserSignUp> = signupAction(res.data);
             dispatch(action)
-            alert('succesful registration')
+            alert('Đăng ký thành công')
         } catch (err) {
             console.log(err)
         }
@@ -153,33 +153,13 @@ export const signinActionApi = (userSignIn: UserSignIn) => {
             if (err.response.status = 500) {
                 Swal.fire({
                     icon: 'warning',
-                    title: 'Please try again. Make sure you fill the correct email and password',
-
+                    title: 'Xin thử lại. Hãy đảm bảo rằng tên tài khoản và mật khẩu của bạn là đúng',
                 })
             }
             console.log(err)
         }
     }
 }
-
-// export const getProfileApi = () => {
-//     return async (dispatch: DispatchType) => {
-//         try {
-//             const res = await axios({
-//                 url: 'https://elearningnew.cybersoft.edu.vn/api/QuanLyNguoiDung/ThongTinTaiKhoan',
-//                 method: 'POST',
-//                 headers: {
-//                     Authorization: `Bearer ${getStoreJson(USER_LOGIN).accessToken}`,
-//                     TokenCybersoft: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA0NSIsIkhldEhhblN0cmluZyI6IjA4LzEyLzIwMjMiLCJIZXRIYW5UaW1lIjoiMTcwMTk5MzYwMDAwMCIsIm5iZiI6MTY3MjA3NDAwMCwiZXhwIjoxNzAyMTQxMjAwfQ.1MKFgiR_REeXZ8RKBhPFQLyitVek8kDJ3u1JPaCB1MU`
-//                 }
-//             })
-//             const action: PayloadAction<UserProfile> = getProfileAction(res.data);
-//             dispatch(action)
-//         } catch (err) {
-//             console.log(err)
-//         }
-//     }
-// }
 
 
 export const editProfileApi = (userEdit: UserEdit) => {

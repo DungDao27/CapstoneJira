@@ -12,6 +12,7 @@ import Login from './pages/Login/Login';
 import "antd/dist/reset.css";
 // import SearchPage from './pages/SearchPage/SearchPage';
 import ReTemplate from './templates/LoginTemplate/ReTemplate';
+import Home from './pages/HomePage/Home';
 
 
 const root = ReactDOM.createRoot(
@@ -43,8 +44,10 @@ root.render(
           </Route>
           <Route path="admin" element={<UserManagement />} />
         </Route> */}
+
         <Route path="" element={<ReTemplate />}>
             <Route index element={<Login />}></Route>
+            <Route path="home" element={<Home/>}></Route>
         </Route>
       </Routes>
     </HistoryRouter>
