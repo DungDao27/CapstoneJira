@@ -52,6 +52,13 @@ root.render(
         <Route path="" element={<ReTemplate />}>
           <Route index element={<Login />}></Route>
         </Route>
+        <Route element={<MainLayout />}>
+          <Route
+            index
+            path={PATH.projectmanagement}
+            element={<ProjectManager />}
+          ></Route>
+        </Route>
       </Routes>
     </HistoryRouter>
   </Provider>
