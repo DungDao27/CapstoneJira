@@ -1,7 +1,7 @@
 import React from 'react'
-import '../HomePage/Blog.css'
 
-export default function Home() {
+
+export default function Jira() {
     return (
         <>
             <section className='blogCourse'>
@@ -313,3 +313,4 @@ export default function Home() {
         </>
     )
 }
+ 

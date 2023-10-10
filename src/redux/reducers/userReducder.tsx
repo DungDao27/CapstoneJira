@@ -3,7 +3,7 @@ import { DispatchType } from '../store';
 import axios from 'axios';
 import { USER_LOGIN, getStoreJson, setStoreJson } from '../../utility/config';
 import Swal from 'sweetalert2';
-
+import { history } from '../..';
 export interface UserSignUp {
 
     // taiKhoan: string,
@@ -138,10 +138,14 @@ export const signinActionApi = (userSignIn: UserSignIn) => {
                             }
                         }, 100);
                     }
+                    {
+                        history.push ('/jira');
+                    } 
                 },
                 willClose: () => {
                     clearInterval(timerInterval);
-                },
+                }
+                ,
             }).then((result) => {
 
                 if (result.dismiss === Swal.DismissReason.timer) {
@@ -155,7 +159,9 @@ export const signinActionApi = (userSignIn: UserSignIn) => {
                     icon: 'warning',
                     title: 'Xin thử lại. Hãy đảm bảo rằng tên tài khoản và mật khẩu của bạn là đúng',
                 })
-            }
+            }{
+                history.push ('/');
+            }  
             console.log(err)
         }
     }

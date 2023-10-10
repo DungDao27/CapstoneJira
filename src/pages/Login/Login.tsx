@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import '../../style/style.css';
+import '../../style/style.scss';
 import { useFormik, withFormik } from 'formik';
 import { UserSignIn, UserSignUp, signinActionApi, signupActionApi } from '../../redux/reducers/userReducder';
 import { useDispatch, useSelector } from 'react-redux';
@@ -62,7 +62,7 @@ const Register = (props: Props) => {
     setClassContainer('container')
 }
 
-  const login = useFormik({
+  const signin = useFormik({
     initialValues: {
       email: '',
       password: ''
@@ -70,18 +70,19 @@ const Register = (props: Props) => {
     onSubmit: (values: UserSignIn) => {
       const action = signinActionApi(values);
       dispatch(action)
-      history.push('/home');
+      
     }
 
   })
-  // useEffect(() => {
-  //   if (isRegistered) {
 
-  //     document.querySelectorAll<HTMLInputElement>('.form-container input').forEach((input) => {
-  //       input.value = '';
-  //     });
-  //   }
-  // }, [isRegistered, register]);
+  useEffect(() => {
+    if (isRegistered) {
+
+      document.querySelectorAll<HTMLInputElement>('.form-container input').forEach((input) => {
+        input.value = '';
+      });
+    }
+  }, [isRegistered, register]);
 
   // useEffect(() => {
   //   if (userSignIn?.maLoaiNguoiDung === 'GV') {
@@ -90,6 +91,8 @@ const Register = (props: Props) => {
   //     history.push('/');
   //   }
   // }, [userLogin?.maLoaiNguoiDung]);
+
+
 
   console.log(userSignIn)
   const containerRef = useRef<HTMLDivElement>(null);
@@ -133,19 +136,19 @@ const Register = (props: Props) => {
           </form>
         </div>
         <div className='form-container sign-in-container'>
-          <form onSubmit={login.handleSubmit}>
+          <form onSubmit={signin.handleSubmit}>
             <h1>Đăng Nhập</h1>
             <input
-              onChange={login.handleChange}
+              onChange={signin.handleChange}
               type="text" placeholder="Email"
               name='email'
-              value={login.values.email} />
+              value={signin.values.email} />
 
             <input
-              onChange={login.handleChange}
+              onChange={signin.handleChange}
               type="password" placeholder="Password"
               name='password'
-              value={login.values.password} />
+              value={signin.values.password} />
             <button type='submit'>Đăng Nhập</button>
 
             <div className="social mt-3 d-flex">
