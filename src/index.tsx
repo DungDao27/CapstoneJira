@@ -18,7 +18,8 @@ import "antd/dist/reset.css";
 import ReTemplate from "./templates/LoginTemplate/ReTemplate";
 import { PATH } from "./config/path";
 import ProjectManager from "./pages/ProjectManager";
-import MainLayout from "./layout/MainLayout";
+import MainLayout from "./layout/MainLayout";import Home from './pages/HomePage/Home';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -48,17 +49,9 @@ root.render(
           </Route>
           <Route path="admin" element={<UserManagement />} />
         </Route> */}
-          <Route path="" element={<ReTemplate />}>
+  
+        <Route path="" element={<ReTemplate />}>
             <Route index element={<Login />}></Route>
-          </Route>
-
-          <Route element={<MainLayout />}>
-            <Route
-              index
-              path={PATH.projectmanagement}
-              element={<ProjectManager />}
-            ></Route>
-          </Route>
         </Route>
       </Routes>
     </HistoryRouter>
