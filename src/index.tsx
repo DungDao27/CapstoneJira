@@ -13,8 +13,6 @@ import "antd/dist/reset.css";
 // import SearchPage from './pages/SearchPage/SearchPage';
 import ReTemplate from './templates/LoginTemplate/ReTemplate';
 import Home from './pages/HomePage/Home';
-import JiraTemplate from './templates/JiraTemplate/JiraTemplate';
-import Jira from './pages/JiraPage/Jira';
 
 
 const root = ReactDOM.createRoot(
@@ -50,11 +48,7 @@ root.render(
         <Route path="" element={<ReTemplate />}>
             <Route index element={<Login />}></Route>
             <Route path="home" element={<Home/>}></Route>
-            {/* <Route path="jira" element={<Jira/>}></Route> */}
         </Route>
-        {/* <Route element={<JiraTemplate/>}>
-          <Route path="jira" element={<Jira/>}></Route>
-        </Route> */}
       </Routes>
     </HistoryRouter>
   </Provider>

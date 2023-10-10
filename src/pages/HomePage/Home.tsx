@@ -1,7 +1,7 @@
 import React from 'react'
 import '../HomePage/Blog.css'
 
-export default function Home() {
+export default function Blog() {
     return (
         <>
             <section className='blogCourse'>
