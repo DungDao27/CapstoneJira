@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { NavLink } from "react-router-dom";
-import { PATH } from "../../config/path";
+import { PATH } from "../config/path";
 import { useDispatch, useSelector } from 'react-redux'
-import { DispatchType, RootState } from '../../redux/store'
-import { USER_LOGIN } from '../../utility/config'
-import { signinAction, UserSignUp } from '../../redux/reducers/userReducder'
-import { history } from '../..'
+import { DispatchType, RootState } from '../redux/store'
+import { USER_LOGIN } from '../utility/config'
+import { signinAction, UserSignUp } from '../redux/reducers/userReducder'
+import { history } from '..'
 import '../../components/Sidebar/Sidebar.css'
 const Sidebar = () => {
 
