@@ -18,11 +18,8 @@ import "antd/dist/reset.css";
 import ReTemplate from "./templates/LoginTemplate/ReTemplate";
 import { PATH } from "./config/path";
 import ProjectManager from "./pages/ProjectManager";
-import UserManager from "./pages/UserManager/UserManager"
 import MainLayout from "./layout/MainLayout";
-
-
-
+import Home from "./pages/HomePage/Home";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -34,6 +31,24 @@ root.render(
   <Provider store={store}>
     <HistoryRouter history={history}>
       <Routes>
+        {/* <Route path="" element={<HomeTemplate />}>
+          <Route index element={<HomePage />} />
+          <Route path="courses">
+            <Route path=":course" element={<DetailCourse />} />
+          </Route>
+          <Route path="register" element={<Register />} />
+          <Route path="blog" element={<Blog />} />
+          <Route path="sukien" element={<Events />} />
+          <Route path="thongtin" element={<About />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="khoahoc" element={<Course />} />
+          <Route path="userProfile" element={<UserProfile />} />
+          <Route path="detail">
+            <Route path=":courseID" element={<CourseContent />} />
+          </Route>
+          <Route path="admin" element={<UserManagement />} />
+        </Route> */}
+
         <Route path="" element={<ReTemplate />}>
           <Route index element={<Login />}></Route>
         </Route>
@@ -43,7 +58,6 @@ root.render(
             path={PATH.projectmanagement}
             element={<ProjectManager />}
           ></Route>
-          <Route path="admin" element={<UserManager/>}></Route>
         </Route>
       </Routes>
     </HistoryRouter>
