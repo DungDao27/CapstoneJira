@@ -1,8 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from 'react'
 import { NavLink } from "react-router-dom";
 import { PATH } from "../config/path";
-
+import { useDispatch, useSelector } from 'react-redux'
+import { DispatchType, RootState } from '../redux/store'
+import { USER_LOGIN } from '../utility/config'
+import { signinAction, UserSignUp } from '../redux/reducers/userReducder'
+import { history } from '..'
 const Sidebar = () => {
+
+  const [formValues, setFormValues] = useState<UserSignUp>({
+    email: '',
+    password: '',
+    name: '',
+    soDT:''
+  });
+
+  const dispatch: DispatchType = useDispatch();
+  const logOut = () => {
+    localStorage.removeItem(USER_LOGIN);
+    const action = signinAction({});
+    dispatch(action);
+    history.push('/');
+  }
   return (
     <div className="d-flex flex-column py-6 px-10 border">
       <div className="d-flex">
@@ -11,13 +30,14 @@ const Sidebar = () => {
         </div>
         <div className="ml-2">
           <p className="m-0">CyberLearn.vn</p>
-          <p>Report bugs</p>
+          <div className="d-flex" onClick={logOut}>
+          <NavLink className="text-dark" to="/">
+            <p>Log Out</p>
+          </NavLink>
+        </div>
         </div>
       </div>
       <div className="mb-3">
-        <p className="m-0">
-          <i className="fa-solid fa-clapperboard mr-1"></i> Cyber Board
-        </p>
         <NavLink className="text-dark" to={PATH.projectmanagement}>
           <i className="fa-solid fa-gear mr-2"></i>
           Project Management
@@ -26,6 +46,16 @@ const Sidebar = () => {
         <NavLink className="text-dark" to={PATH.createproject}>
           <i className="fa-solid fa-gear mr-1"></i>
           Craete Project
+        </NavLink>
+        <br />
+        <NavLink className="text-dark" to={PATH.createtask}>
+          <i className="fa-solid fa-gear mr-1"></i>
+          Craete Task
+        </NavLink>
+        <br />
+        <NavLink className="text-dark" to="/admin">
+          <i className="fa fa-user mr-1"></i>
+          User Management
         </NavLink>
       </div>
       <span className="h-[1px] w-[110%] bg-dark"></span>
