@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { quanLyProjectServices } from "../../services/quanLyProject";
-import { PrjUpdate } from "../../types/quanLyProject";
+import { PrjUpdate, ProjectCreated } from "../../types/quanLyProject";
+import { quanLyPrjCategoryService } from "../../services/quanLyPrjCategory";
 
 export const getAllProjectThunk = createAsyncThunk(
   "quanLyProject/getAllProjectThunk",
@@ -20,7 +21,9 @@ export const deleteProjectThunk = createAsyncThunk(
   async (payload: number) => {
     try {
       const data = await quanLyProjectServices.deleteProject(payload);
-      return data;
+      console.log(data);
+      alert(data?.data?.message);
+      window.location.reload();
     } catch (error: any) {
       const data = error?.response?.data?.content;
       alert(data);
@@ -55,6 +58,31 @@ export const updateProjectThunk = createAsyncThunk(
     } catch (error: any) {
       const res = error?.response?.data?.content;
       alert(res);
+    }
+  }
+);
+
+export const getProjectCategoryThunk = createAsyncThunk(
+  "quanLyProject/getProjectCategoryThunk",
+  async () => {
+    try {
+      const data = await quanLyPrjCategoryService.getProjectCategory();
+      return data.data.content;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+export const createProjectThunk = createAsyncThunk(
+  "quanLyProject/createProjectThunk",
+  async (payload: any) => {
+    try {
+      const data = await quanLyProjectServices.createProject(payload);
+      alert(data?.data?.message);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
     }
   }
 );

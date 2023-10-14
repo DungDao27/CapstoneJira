@@ -23,10 +23,10 @@ const Sidebar = () => {
           Project Management
         </NavLink>
         <br />
-        <p className="text-dark">
+        <NavLink className="text-dark" to={PATH.createproject}>
           <i className="fa-solid fa-gear mr-1"></i>
           Craete Project
-        </p>
+        </NavLink>
       </div>
       <span className="h-[1px] w-[110%] bg-dark"></span>
       <div className="mt-4">

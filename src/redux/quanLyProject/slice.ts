@@ -2,14 +2,16 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   deleteProjectThunk,
   getAllProjectThunk,
+  getProjectCategoryThunk,
   getProjectDetailThunk,
   updateProjectThunk,
 } from "./thunk";
-import { PrjDetail, Project } from "../../types/quanLyProject";
+import { PrjDetail, Project, ProjectCreated } from "../../types/quanLyProject";
 
 type QuanLyProjectInitialState = {
   allProject: Project[];
   prjDetail: PrjDetail;
+  prjCategory: ProjectCreated[];
 };
 
 const initialState: QuanLyProjectInitialState = {
@@ -30,6 +32,7 @@ const initialState: QuanLyProjectInitialState = {
     },
     projectName: "",
   },
+  prjCategory: [],
 };
 
 const quanLyProjectSlice = createSlice({
@@ -45,6 +48,9 @@ const quanLyProjectSlice = createSlice({
         if (payload) {
           state.prjDetail = payload;
         }
+      })
+      .addCase(getProjectCategoryThunk.fulfilled, (state, { payload }) => {
+        state.prjCategory = payload;
       });
   },
 });

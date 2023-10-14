@@ -1,16 +1,20 @@
-export type Project = {
-  alias: string;
+export type ProjectCreated = {
+  id: number;
+  projectName: string;
+  description: string;
   categoryId: number;
+  alias: string;
+  deleted: boolean;
+  creator: number;
+};
+
+export type Project = ProjectCreated & {
   categoryName: string;
   creator: {
     id: number;
     name: string;
   };
-  delete: false;
-  description: string;
-  id: number;
   members: Member[];
-  projectName: string;
 };
 
 export type Member = {

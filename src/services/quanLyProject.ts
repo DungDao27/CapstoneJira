@@ -1,5 +1,5 @@
 import { apiInstance } from "../constants/apiInstance";
-import { PrjDetail, PrjUpdate, Project } from "../types/quanLyProject";
+import { PrjDetail, PrjUpdate, ProjectCreated } from "../types/quanLyProject";
 
 const api = apiInstance({
   baseURL: "https://jiranew.cybersoft.edu.vn/api/Project",
@@ -16,4 +16,7 @@ export const quanLyProjectServices = {
 
   updateProject: (payload: PrjUpdate, projectId: string) =>
     api.put(`/updateProject?projectId=${projectId}`, payload),
+
+  createProject: (payload: ProjectCreated) =>
+    api.post("/createProjectAuthorize", payload),
 };
