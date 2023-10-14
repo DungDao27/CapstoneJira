@@ -11,7 +11,8 @@ export const apiInstance = (config: CreateAxiosDefaults) => {
       ...config,
       headers: {
         TokenCybersoft: TOKEN_CYBERSOFT,
-        authorization: "Bearer" + " " + localStorage.getItem("accessToken"),
+        authorization:
+          "Bearer eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJtb3RoYWliYUBnbWFpbC5jb20iLCJuYmYiOjE2OTY5MTU4NjksImV4cCI6MTY5NjkxOTQ2OX0.vKEeGhcPeZV0uygIduPJL4_dTnNfWNbm8nQ9FKYXQlk",
       } as unknown as AxiosRequestHeaders,
     };
   });

@@ -20,6 +20,7 @@ import { PATH } from "./config/path";
 import ProjectManager from "./pages/ProjectManager";
 import MainLayout from "./layout/MainLayout";
 import Home from "./pages/HomePage/Home";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

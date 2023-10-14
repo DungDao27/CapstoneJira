@@ -1,13 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllProjectThunk } from "./thunk";
-import { Project } from "../../types/quanLyProject";
+import {
+  deleteProjectThunk,
+  getAllProjectThunk,
+  getProjectDetailThunk,
+  updateProjectThunk,
+} from "./thunk";
+import { PrjDetail, Project } from "../../types/quanLyProject";
 
 type QuanLyProjectInitialState = {
   allProject: Project[];
+  prjDetail: PrjDetail;
 };
 
 const initialState: QuanLyProjectInitialState = {
   allProject: [],
+  prjDetail: {
+    alias: "",
+    creator: {
+      id: 0,
+      name: "",
+    },
+    description: "",
+    id: 0,
+    lstTask: [],
+    members: [],
+    projectCategory: {
+      id: 0,
+      name: "",
+    },
+    projectName: "",
+  },
 };
 
 const quanLyProjectSlice = createSlice({
@@ -15,11 +37,15 @@ const quanLyProjectSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAllProjectThunk.fulfilled, (state, { payload }) => {
-      console.log("payload: ", payload.length);
-
-      state.allProject = payload;
-    });
+    builder
+      .addCase(getAllProjectThunk.fulfilled, (state, { payload }) => {
+        state.allProject = payload;
+      })
+      .addCase(getProjectDetailThunk.fulfilled, (state, { payload }) => {
+        if (payload) {
+          state.prjDetail = payload;
+        }
+      });
   },
 });
 

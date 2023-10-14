@@ -18,3 +18,28 @@ export type Member = {
   name: string;
   avatar: string;
 };
+
+export type PrjDetail = {
+  alias: string;
+  creator: {
+    id: number;
+    name: string;
+  };
+  description: string;
+  id: number;
+  lstTask: [];
+  members: Member[];
+  projectCategory: {
+    id: number;
+    name: string;
+  };
+  projectName: string;
+};
+
+export type PrjUpdate = {
+  id: number;
+  projectName: string;
+  creator: number;
+  description: string;
+  categoryId: number;
+};
