@@ -19,7 +19,6 @@ import ReTemplate from "./templates/LoginTemplate/ReTemplate";
 import { PATH } from "./config/path";
 import ProjectManager from "./pages/ProjectManager";
 import MainLayout from "./layout/MainLayout";
-import Home from "./pages/HomePage/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CreateProject from "./pages/CreateProject";
 import CreateTask from "./pages/CreateTask";
@@ -34,33 +33,11 @@ root.render(
   <Provider store={store}>
     <HistoryRouter history={history}>
       <Routes>
-        {/* <Route path="" element={<HomeTemplate />}>
-          <Route index element={<HomePage />} />
-          <Route path="courses">
-            <Route path=":course" element={<DetailCourse />} />
-          </Route>
-          <Route path="register" element={<Register />} />
-          <Route path="blog" element={<Blog />} />
-          <Route path="sukien" element={<Events />} />
-          <Route path="thongtin" element={<About />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="khoahoc" element={<Course />} />
-          <Route path="userProfile" element={<UserProfile />} />
-          <Route path="detail">
-            <Route path=":courseID" element={<CourseContent />} />
-          </Route>
-          <Route path="admin" element={<UserManagement />} />
-        </Route> */}
-
         <Route path="" element={<ReTemplate />}>
           <Route index element={<Login />}></Route>
         </Route>
         <Route element={<MainLayout />}>
-          <Route
-            index
-            path={PATH.projectmanagement}
-            element={<ProjectManager />}
-          ></Route>
+          <Route index path={PATH.projectmanagement} element={<ProjectManager />}></Route>
           <Route path={PATH.createproject} element={<CreateProject />}></Route>
           <Route path={PATH.createtask} element={<CreateTask />}></Route>
         </Route>
