@@ -1,63 +1,50 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { DispatchType } from '../store';
 import axios from 'axios';
+import { history } from '../..';
 import { USER_LOGIN, getStoreJson, setStoreJson } from '../../utility/config';
 import Swal from 'sweetalert2';
 
 export interface UserSignUp {
-
-    // taiKhoan: string,
-    // matKhau: string,
-    // hoTen: string,
-    // soDT: string,
-    // maNhom: string,
     email: string,
     password: string,
     name: string,
-    soDT: string
-
+    phoneNumber: string
 }
 export interface UserSignIn {
-    // taiKhoan: string,
-    // matKhau: string,
     accessToken?: string,
-    // maLoaiNguoiDung?: string,
     email: string,
     password: string
-
 }
 
-// export interface UserProfile {
-//     chiTietKhoaHocGhiDanh: any[];
-//     taiKhoan: string;
-//     matKhau: string;
-//     hoTen: string;
-//     soDT: string;
-//     maLoaiNguoiDung: string;
-//     maNhom: string;
-//     email: string;
-// }
+export interface UserInfo {
+    id: number;
+    name: string;
+    phoneNumber: string;
+}
 export interface UserEdit {
     id: string,
     email: string,
     password: string,
     name: string,
-    soDT: string
+    phoneNumber: string,
 }
-
+export interface deleteUser {
+    id : string;
+  }
 interface Userstate {
     userSignUp: UserSignUp | null,
     userSignIn: UserSignIn | null,
-    // userProfile: UserProfile | null
+    userInfo: UserInfo | null,
     userEdit: UserEdit | null,
-
+    deleteUser: deleteUser[];
 }
 const initialState: Userstate = {
     userSignUp: null,
-    userSignIn: getStoreJson(USER_LOGIN),
-    // userProfile: null,
+    userSignIn: null,
+    userInfo: null,
     userEdit: null,
-
+    deleteUser: [],
 }
 
 const userReducder = createSlice({
@@ -70,17 +57,19 @@ const userReducder = createSlice({
         signinAction: (state, action) => {
             state.userSignIn = action.payload
         },
-        // getProfileAction: (state, action) => {
-        //     state.userProfile = action.payload
-        // },
-
-        editProfileAction: (state, action) => {
+        getInfoAction: (state, action) => {
+            state.userInfo = action.payload
+        },
+        editUserAction: (state, action) => {
             state.userEdit = action.payload
-        }
+        },
+        deleteUserAction: (state, action) => {
+            state.deleteUser = state.deleteUser.filter(item => item.id !== action.payload)
+          },
     }
 });
 
-export const { signupAction, signinAction, editProfileAction } = userReducder.actions
+export const { signupAction, signinAction, editUserAction, getInfoAction, deleteUserAction } = userReducder.actions
 
 export default userReducder.reducer
 
@@ -97,7 +86,7 @@ export const signupActionApi = (userSignUp: UserSignUp) => {
                 data: userSignUp
             })
 
-            const action: PayloadAction<UserSignUp> = signupAction(res.data);
+            const action: PayloadAction<UserSignUp> = signupAction(res.data.content);
             dispatch(action)
             alert('Đăng ký thành công')
         } catch (err) {
@@ -118,7 +107,7 @@ export const signinActionApi = (userSignIn: UserSignIn) => {
                 },
                 data: userSignIn
             })
-            const action: PayloadAction<UserSignIn> = signinAction(res.data);
+            const action: PayloadAction<UserSignIn> = signinAction(res.data.content);
             dispatch(action)
             let timerInterval: NodeJS.Timeout;
 
@@ -148,7 +137,7 @@ export const signinActionApi = (userSignIn: UserSignIn) => {
                     console.log('I was closed by the timer');
                 }
             });
-            setStoreJson(USER_LOGIN, res.data)
+            setStoreJson(USER_LOGIN, res.data.content)
         } catch (err: any) {
             if (err.response.status = 500) {
                 Swal.fire({
@@ -156,13 +145,14 @@ export const signinActionApi = (userSignIn: UserSignIn) => {
                     title: 'Xin thử lại. Hãy đảm bảo rằng tên tài khoản và mật khẩu của bạn là đúng',
                 })
             }
+            history.push('/login')
             console.log(err)
         }
     }
 }
 
 
-export const editProfileApi = (userEdit: UserEdit) => {
+export const editUserApi = (userEdit: UserEdit) => {
     return async (dispatch: DispatchType) => {
         try {
             const res = await axios({
@@ -170,12 +160,12 @@ export const editProfileApi = (userEdit: UserEdit) => {
                 method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${getStoreJson(USER_LOGIN).accessToken}`,
-                    TokenCybersoft: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA0NSIsIkhldEhhblN0cmluZyI6IjA4LzEyLzIwMjMiLCJIZXRIYW5UaW1lIjoiMTcwMTk5MzYwMDAwMCIsIm5iZiI6MTY3MjA3NDAwMCwiZXhwIjoxNzAyMTQxMjAwfQ.1MKFgiR_REeXZ8RKBhPFQLyitVek8kDJ3u1JPaCB1MU`
+                    TokenCybersoft: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA0NiIsIkhldEhhblN0cmluZyI6IjMxLzAxLzIwMjQiLCJIZXRIYW5UaW1lIjoiMTcwNjY1OTIwMDAwMCIsIm5iZiI6MTY3ODI5NDgwMCwiZXhwIjoxNzA2ODA2ODAwfQ.RmFBx9ElL7VuYNzZnzMoGUHyC3iXKRpw7Yvq2LsXk0Q`
                 },
                 data: userEdit
             })
             console.log(res)
-            const action: PayloadAction<UserEdit> = editProfileAction(res.data);
+            const action: PayloadAction<UserEdit> = editUserAction(res.data.content);
             dispatch(action)
             Swal.fire({
                 position: 'top-end',
@@ -189,5 +179,27 @@ export const editProfileApi = (userEdit: UserEdit) => {
         }
     }
 }
-
+export const deleteUserApi = (courseId: string) => {
+    return async (dispatch: DispatchType) => {
+      try {
+        const res = await axios({
+          url: `https://jiranew.cybersoft.edu.vn/api/Users/deleteUser=${courseId}`,
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${getStoreJson(USER_LOGIN).accessToken}`,
+            TokenCybersoft: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA0NSIsIkhldEhhblN0cmluZyI6IjA4LzEyLzIwMjMiLCJIZXRIYW5UaW1lIjoiMTcwMTk5MzYwMDAwMCIsIm5iZiI6MTY3MjA3NDAwMCwiZXhwIjoxNzAyMTQxMjAwfQ.1MKFgiR_REeXZ8RKBhPFQLyitVek8kDJ3u1JPaCB1MU`
+          },
+        })
+        dispatch(res.data)
+  
+      } catch (err) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Students have registered this course. You cannot delete',
+  
+        })
+        console.log(err)
+      }
+    }
+  }
 

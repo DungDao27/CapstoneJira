@@ -26,13 +26,9 @@ const Register = (props: Props) => {
       email: '',
       password: '',
       name: '',
-      soDT: '',
+      phoneNumber: '',
     },
     validationSchema: Yup.object().shape({
-      // taiKhoan: Yup.string()
-      //   .min(2, 'Tài khoản quá ít kí tự')
-      //   .max(16, 'Tài khoản quá 16 kí tự')
-      //   .required('Tài khoản không được để trống'),
 
       password: Yup.string()
         .required('Mật khẩu không được để trống')
@@ -44,7 +40,7 @@ const Register = (props: Props) => {
 
       email: Yup.string().email('Email không hợp lệ').required('Email không được để trống'),
 
-      soDT: Yup.string()
+      phoneNumber: Yup.string()
         .required('Số điện thoại không được để trống')
         .matches(/([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/, 'Số điện thoại chưa đúng định đạng'),
     }),
@@ -62,35 +58,18 @@ const Register = (props: Props) => {
     setClassContainer('container')
 }
 
-  const login = useFormik({
+  const signin = useFormik({
     initialValues: {
       email: '',
       password: ''
     },
     onSubmit: (values: UserSignIn) => {
       const action = signinActionApi(values);
-      dispatch(action)
-      history.push('/home');
+      dispatch(action);
+      history.push('/projectmanagement');
     }
-
   })
-  // useEffect(() => {
-  //   if (isRegistered) {
-
-  //     document.querySelectorAll<HTMLInputElement>('.form-container input').forEach((input) => {
-  //       input.value = '';
-  //     });
-  //   }
-  // }, [isRegistered, register]);
-
-  // useEffect(() => {
-  //   if (userSignIn?.maLoaiNguoiDung === 'GV') {
-  //     history.push('/admin');
-  //   } else if (userLogin?.maLoaiNguoiDung === 'HV') {
-  //     history.push('/');
-  //   }
-  // }, [userLogin?.maLoaiNguoiDung]);
-
+  
   console.log(userSignIn)
   const containerRef = useRef<HTMLDivElement>(null);
   const signInEmailRef = useRef<HTMLInputElement>(null);
@@ -125,27 +104,27 @@ const Register = (props: Props) => {
             {register.errors.email && register.touched.email ? <div className='errorMessage'>{register.errors.email}</div> : <div className='message'></div>}
             <input type='text' placeholder='Name' id='name' name='name' onChange={register.handleChange} />
             {register.errors.name && register.touched.name ? <div className='errorMessage'>{register.errors.name}</div> : <div className='message'></div>}
-            <input type='text' placeholder='Phone' id='soDT' name='soDT' onChange={register.handleChange} />
-            {register.errors.soDT && register.touched.soDT ? <div className='errorMessage'>{register.errors.soDT}</div> : <div className='message'></div>}
+            <input type='text' placeholder='Phone' id='phoneNumber' name='phoneNumber' onChange={register.handleChange} />
+            {register.errors.phoneNumber && register.touched.phoneNumber ? <div className='errorMessage'>{register.errors.phoneNumber}</div> : <div className='message'></div>}
             <input type='password' placeholder='Password' id='password' name='password' onChange={register.handleChange} />
             {register.errors.password && register.touched.password ? <div className='errorMessage'>{register.errors.password}</div> : <div className='message'></div>}
             <button type='submit'>Đăng Ký</button>
           </form>
         </div>
         <div className='form-container sign-in-container'>
-          <form onSubmit={login.handleSubmit}>
+          <form onSubmit={signin.handleSubmit}>
             <h1>Đăng Nhập</h1>
             <input
-              onChange={login.handleChange}
+              onChange={signin.handleChange}
               type="text" placeholder="Email"
               name='email'
-              value={login.values.email} />
+              value={signin.values.email} />
 
             <input
-              onChange={login.handleChange}
+              onChange={signin.handleChange}
               type="password" placeholder="Password"
               name='password'
-              value={login.values.password} />
+              value={signin.values.password} />
             <button type='submit'>Đăng Nhập</button>
 
             <div className="social mt-3 d-flex">
