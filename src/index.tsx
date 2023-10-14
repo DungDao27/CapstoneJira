@@ -22,6 +22,7 @@ import MainLayout from "./layout/MainLayout";
 import Home from "./pages/HomePage/Home";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CreateProject from "./pages/CreateProject";
+import CreateTask from "./pages/CreateTask";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -61,6 +62,7 @@ root.render(
             element={<ProjectManager />}
           ></Route>
           <Route path={PATH.createproject} element={<CreateProject />}></Route>
+          <Route path={PATH.createtask} element={<CreateTask />}></Route>
         </Route>
       </Routes>
     </HistoryRouter>
