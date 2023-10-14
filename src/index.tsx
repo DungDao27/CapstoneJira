@@ -20,6 +20,8 @@ import { PATH } from "./config/path";
 import ProjectManager from "./pages/ProjectManager";
 import MainLayout from "./layout/MainLayout";
 import Home from "./pages/HomePage/Home";
+import "bootstrap/dist/css/bootstrap.min.css";
+import CreateProject from "./pages/CreateProject";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -58,6 +60,7 @@ root.render(
             path={PATH.projectmanagement}
             element={<ProjectManager />}
           ></Route>
+          <Route path={PATH.createproject} element={<CreateProject />}></Route>
         </Route>
       </Routes>
     </HistoryRouter>
