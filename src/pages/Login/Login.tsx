@@ -6,7 +6,7 @@ import {
   UserSignUp,
   signinActionApi,
   signupActionApi,
-} from "../../redux/reducers/userReducder";
+} from "../../redux/reducers/userReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { DispatchType, RootState } from "../../redux/store";
 import { history } from "../..";
@@ -34,7 +34,7 @@ const Register = (props: Props) => {
       email: "",
       password: "",
       name: "",
-      soDT: "",
+      phoneNumber: "",
     },
     validationSchema: Yup.object().shape({
       // taiKhoan: Yup.string()
@@ -171,12 +171,12 @@ const Register = (props: Props) => {
             <input
               type="text"
               placeholder="Phone"
-              id="soDT"
-              name="soDT"
+              id="phoneNumber"
+              name="phoneNumber"
               onChange={register.handleChange}
             />
-            {register.errors.soDT && register.touched.soDT ? (
-              <div className="errorMessage">{register.errors.soDT}</div>
+            {register.errors.phoneNumber && register.touched.phoneNumber ? (
+              <div className="errorMessage">{register.errors.phoneNumber}</div>
             ) : (
               <div className="message"></div>
             )}

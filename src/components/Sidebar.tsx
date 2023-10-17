@@ -4,15 +4,17 @@ import { PATH } from "../config/path";
 import { useDispatch, useSelector } from 'react-redux'
 import { DispatchType, RootState } from '../redux/store'
 import { USER_LOGIN } from '../utility/config'
-import { signinAction, UserSignUp } from '../redux/reducers/userReducder'
+import { signinAction, UserSignUp } from '../redux/reducers/userReducer'
+import {User, getUserListAction, getUserListApi} from '../redux/reducers/adminReducer'
 import { history } from '..'
+import { userInfo } from 'os';
 const Sidebar = () => {
 
   const [formValues, setFormValues] = useState<UserSignUp>({
     email: '',
     password: '',
     name: '',
-    soDT:''
+    phoneNumber:''
   });
 
   const dispatch: DispatchType = useDispatch();
@@ -29,7 +31,7 @@ const Sidebar = () => {
           <img className="w-10" src="./ico.png" alt="" />
         </div>
         <div className="ml-2">
-          <p className="m-0">CyberLearn.vn</p>
+          <p className="m-0">Hello </p>
           <div className="d-flex" onClick={logOut}>
           <NavLink className="text-dark" to="/">
             <p>Log Out</p>

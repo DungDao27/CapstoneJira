@@ -22,6 +22,7 @@ import MainLayout from "./layout/MainLayout";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CreateProject from "./pages/CreateProject";
 import CreateTask from "./pages/CreateTask";
+import UserManager from "./pages/UserManager/UserManager";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -40,6 +41,7 @@ root.render(
           <Route index path={PATH.projectmanagement} element={<ProjectManager />}></Route>
           <Route path={PATH.createproject} element={<CreateProject />}></Route>
           <Route path={PATH.createtask} element={<CreateTask />}></Route>
+          <Route path="admin" element={<UserManager/>}></Route>
         </Route>
       </Routes>
     </HistoryRouter>
