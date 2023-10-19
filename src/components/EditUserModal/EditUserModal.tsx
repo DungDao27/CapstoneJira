@@ -113,7 +113,6 @@ const EditUserModal = (props: EditUserModalProps) => {
                         className="form-control input-sm"
                         placeholder="Email"
                         value={frm.values.email}
-                        
                       />
                     </div>
                   </div>

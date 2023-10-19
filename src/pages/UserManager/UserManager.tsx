@@ -5,8 +5,8 @@ import { DispatchType, RootState } from "../../redux/store";
 import {
   User,
   getUserListApi,
-  deleteUserApi,
 } from "../../redux/reducers/adminReducer";
+import {  deleteUserApi } from "../../redux/reducers/userReducer"
 import { Pagination, Tabs } from "antd";
 import { useFormik } from "formik";
 import { string } from "yup";
@@ -112,8 +112,7 @@ const UserManager = (props: Props) => {
                   </thead>
                   {/* Table body */}
                   <tbody>
-                    {filteredUserList
-                      ?.slice((currentPage - 1) * 6, currentPage * 6)
+                    {filteredUserList?.slice((currentPage - 1) * 6, currentPage * 6)
                       .map((item, index) => {
                         const actualIndex = (currentPage - 1) * 6 + index + 1;
                         return (
