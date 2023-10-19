@@ -99,25 +99,3 @@ export const addUserApi = (user: Adduser) => {
     }
   }
 }
-export const deleteUserApi = (UserID: string) => {
-  return async (dispatch: DispatchType) => {
-    try {
-      const res = await axios({
-        url: `https://jiranew.cybersoft.edu.vn/api/Users/deleteUser?id=${UserID}`,
-        method: 'DELETE',
-        headers: {
-          Authorization: `Bearer ${getStoreJson(USER_LOGIN).accessToken}`,
-          TokenCybersoft: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA0NSIsIkhldEhhblN0cmluZyI6IjA4LzEyLzIwMjMiLCJIZXRIYW5UaW1lIjoiMTcwMTk5MzYwMDAwMCIsIm5iZiI6MTY3MjA3NDAwMCwiZXhwIjoxNzAyMTQxMjAwfQ.1MKFgiR_REeXZ8RKBhPFQLyitVek8kDJ3u1JPaCB1MU`
-        },
-      })
-      const action = deleteUserAction(res.data);
-      dispatch(action)
-      alert('User is deleted')
-
-    } catch (err) {
-      console.log(err)
-    }
-  }
-}
-
-

@@ -9,12 +9,10 @@ import {
 } from "../redux/quanLyProject/thunk";
 import ReactPaginate from "react-paginate";
 import { Member, Project } from "../types/quanLyProject";
-
 const ProjectManager = () => {
   const { allProject, prjDetail } = useSelector(
     (state: RootState) => state.quanLyProject
   );
-
   const category = prjDetail?.projectCategory?.name;
 
   const [totalPrjs, setTotalPrjs] = useState(0);

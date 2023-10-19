@@ -25,7 +25,7 @@ const Footer = (props: Props) => {
           </div>
         </div>
         <div className="col-lg-4 col-md-6 footer_item">
-              <h3> Elearning</h3>
+              <h3>Jira</h3>
               <ul className="footer_contact">
                   <li>
                       <i className="fa fa-phone"></i>

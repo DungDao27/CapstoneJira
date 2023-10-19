@@ -16,6 +16,9 @@ export interface UserSignIn {
     email: string,
     password: string
 }
+export interface userId {
+    id: string 
+  }
 
 export interface UserInfo {
     id: number;
@@ -65,7 +68,7 @@ const userReducder = createSlice({
         },
         deleteUserAction: (state, action) => {
             state.deleteUser = state.deleteUser.filter(item => item.id !== action.payload)
-          },
+        },
     }
 });
 
@@ -179,20 +182,21 @@ export const editUserApi = (userEdit: UserEdit) => {
         }
     }
 }
-export const deleteUserApi = (courseId: string) => {
+export const deleteUserApi = (userId: string) => {
     return async (dispatch: DispatchType) => {
       try {
         const res = await axios({
-          url: `https://jiranew.cybersoft.edu.vn/api/Users/deleteUser=${courseId}`,
+          url: `https://jiranew.cybersoft.edu.vn/api/Users/deleteUser=${userId}`,
           method: 'DELETE',
           headers: {
             Authorization: `Bearer ${getStoreJson(USER_LOGIN).accessToken}`,
             TokenCybersoft: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA0NSIsIkhldEhhblN0cmluZyI6IjA4LzEyLzIwMjMiLCJIZXRIYW5UaW1lIjoiMTcwMTk5MzYwMDAwMCIsIm5iZiI6MTY3MjA3NDAwMCwiZXhwIjoxNzAyMTQxMjAwfQ.1MKFgiR_REeXZ8RKBhPFQLyitVek8kDJ3u1JPaCB1MU`
           },
         })
-        dispatch(res.data)
+        dispatch(res.data.content)
   
-      } catch (err) {
+      } 
+      catch (err) {
         Swal.fire({
           icon: 'warning',
           title: 'Students have registered this course. You cannot delete',

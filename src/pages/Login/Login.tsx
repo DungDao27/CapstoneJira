@@ -92,22 +92,6 @@ const Register = (props: Props) => {
       history.push("/projectmanagement");
     },
   });
-  // useEffect(() => {
-  //   if (isRegistered) {
-
-  //     document.querySelectorAll<HTMLInputElement>('.form-container input').forEach((input) => {
-  //       input.value = '';
-  //     });
-  //   }
-  // }, [isRegistered, register]);
-
-  // useEffect(() => {
-  //   if (userSignIn?.maLoaiNguoiDung === 'GV') {
-  //     history.push('/admin');
-  //   } else if (userLogin?.maLoaiNguoiDung === 'HV') {
-  //     history.push('/');
-  //   }
-  // }, [userLogin?.maLoaiNguoiDung]);
 
   console.log(userSignIn);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -215,7 +199,7 @@ const Register = (props: Props) => {
             />
             <button type="submit">Đăng Nhập</button>
 
-            <div className="social mt-3 d-flex">
+            {/* <div className="social mt-3 d-flex">
               <Button
                 style={{ backgroundColor: "rgb(59,89,152)" }}
                 shape="circle"
@@ -233,7 +217,7 @@ const Register = (props: Props) => {
                 {" "}
                 <i className="fab fa-google"></i>
               </Button>
-            </div>
+            </div> */}
           </form>
         </div>
         <div className="overlay-container">
