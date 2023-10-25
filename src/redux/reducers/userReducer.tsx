@@ -199,7 +199,7 @@ export const deleteUserApi = (userId: string) => {
       catch (err) {
         Swal.fire({
           icon: 'warning',
-          title: 'Students have registered this course. You cannot delete',
+          title: 'Something went wrong',
   
         })
         console.log(err)

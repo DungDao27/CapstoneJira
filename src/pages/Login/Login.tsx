@@ -37,11 +37,6 @@ const Register = (props: Props) => {
       phoneNumber: "",
     },
     validationSchema: Yup.object().shape({
-      // taiKhoan: Yup.string()
-      //   .min(2, 'Tài khoản quá ít kí tự')
-      //   .max(16, 'Tài khoản quá 16 kí tự')
-      //   .required('Tài khoản không được để trống'),
-
       password: Yup.string()
         .required("Mật khẩu không được để trống")
         .matches(
@@ -60,7 +55,7 @@ const Register = (props: Props) => {
         .email("Email không hợp lệ")
         .required("Email không được để trống"),
 
-      soDT: Yup.string()
+      phoneNumber: Yup.string()
         .required("Số điện thoại không được để trống")
         .matches(
           /([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/,
@@ -140,14 +135,9 @@ const Register = (props: Props) => {
             ) : (
               <div className="message"></div>
             )}
-            <input
-              type="text"
-              placeholder="Name"
-              id="name"
-              name="name"
-              onChange={register.handleChange}
-            />
-            {register.errors.name && register.touched.name ? (
+            <input type="text" placeholder="Name" id="name" name="name" onChange={register.handleChange}/>
+            {register.errors.name && register.touched.name ? 
+            (
               <div className="errorMessage">{register.errors.name}</div>
             ) : (
               <div className="message"></div>
