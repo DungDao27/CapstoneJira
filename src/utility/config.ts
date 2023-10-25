@@ -19,7 +19,7 @@ export const { getStoreJson, setStoreJson, getStore, setStore } = {
   setStoreJson: (name: string, data: any): void => {
     const strJSON = JSON.stringify(data);
     localStorage.setItem(name, strJSON);
-    const accessToken = JSON.parse(strJSON)?.content?.accessToken;
+    const accessToken = JSON.parse(strJSON)?.accessToken;
     localStorage.setItem("accessToken", accessToken);
   },
   getStore: (name: string): string | null => {
