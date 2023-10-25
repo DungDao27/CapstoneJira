@@ -51,8 +51,8 @@ const UserManager = (props: Props) => {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-  const [selectedFileName, setSelectedFileName] = useState<string>("");
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  // const [selectedFileName, setSelectedFileName] = useState<string>("");
+  // const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
 
 
@@ -101,7 +101,7 @@ const UserManager = (props: Props) => {
                 <table className="table  table-hover">
                   <thead>
                     <tr>
-                      <th>STT</th>
+                      <th>ID</th>
                       <th>Email</th>
                       <th>Name</th>
                       <th>Phone</th>

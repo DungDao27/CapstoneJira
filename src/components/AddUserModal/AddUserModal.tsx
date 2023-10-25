@@ -1,9 +1,10 @@
 import { useFormik } from "formik";
 import React from "react";
 import { Adduser, addUserApi } from "../../redux/reducers/adminReducer";
+import {UserSignUp, signupActionApi}  from "../../redux/reducers/userReducer";
 import { DispatchType } from "../../redux/store";
 import { useDispatch } from "react-redux";
-
+import * as Yup from "yup";
 type Props = {};
 
 const AddUserModal = (props: Props) => {
@@ -16,9 +17,35 @@ const AddUserModal = (props: Props) => {
       password: "",
       phoneNumber: "",
     },
-    onSubmit: (values: Adduser) => {
+    validationSchema: Yup.object().shape({
+      password: Yup.string()
+        .required("Mật khẩu không được để trống")
+        .matches(
+          /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+          "Mật khẩu phải ít nhất 8 tự gồm chữ, số, và kí tự đặc biệt"
+        ),
+
+      name: Yup.string()
+        .required("Tên không được để trống")
+        .matches(
+          /^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý\\s]+$/,
+          "Chỉ nhập kí tự chữ"
+        ),
+
+      email: Yup.string()
+        .email("Email không hợp lệ")
+        .required("Email không được để trống"),
+
+      phoneNumber: Yup.string()
+        .required("Số điện thoại không được để trống")
+        .matches(
+          /([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/,
+          "Số điện thoại chưa đúng định đạng"
+        ),
+    }),
+    onSubmit: (values: UserSignUp) => {
       console.log(values);
-      const action = addUserApi(values);
+      const action = signupActionApi(values);
       dispatch(action);
     },
   });
@@ -56,22 +83,6 @@ const AddUserModal = (props: Props) => {
               </div>
               <div className="modal-body">
                 <div>
-                  {/* <div className="form-group">
-                    <div className="input-group">
-                      <div className="input-group-prepend">
-                        <span className="input-group-text">
-                          <i className="fa fa-user" />
-                        </span>
-                      </div>
-                      <input
-                        onChange={frm.handleChange}
-                        name="taiKhoan"
-                        id="tknv"
-                        className="form-control input-sm"
-                        placeholder="User name"
-                      />
-                    </div>
-                  </div> */}
                   <div className="form-group">
                     <div className="input-group">
                       <div className="input-group-prepend">
@@ -81,16 +92,19 @@ const AddUserModal = (props: Props) => {
                       </div>
                       <input
                         onChange={frm.handleChange}
-
                         type="text"
                         name="name"
                         id="name"
                         className="form-control input-sm"
                         placeholder="User name"
-                      
-                        
-                      />
+                      />                  
                     </div>
+                    {frm.errors.name && frm.touched.name ?
+                        (
+                          <div className="errorMessage">{frm.errors.name}</div>
+                        ) : (
+                          <div className="message"></div>
+                        )}
                   </div>
                   <div className="form-group">
                     <div className="input-group">
@@ -101,16 +115,19 @@ const AddUserModal = (props: Props) => {
                       </div>
                       <input
                         onChange={frm.handleChange}
-
                         type="text"
                         name="email"
                         id="email"
                         className="form-control input-sm"
-                        placeholder="Email"
-                       
-                        
+                        placeholder="Email"                                              
                       />
                     </div>
+                    {frm.errors.email && frm.touched.email ?
+                        (
+                          <div className="errorMessage">{frm.errors.email}</div>
+                        ) : (
+                          <div className="message"></div>
+                        )}
                   </div>
                   <div className="form-group">
                     <div className="input-group">
@@ -122,12 +139,18 @@ const AddUserModal = (props: Props) => {
                       <input
                          onChange={frm.handleChange}
                         type="password"
-                        name="matKhau"
-                        id="password"
-                        className="form-control input-sm"
                         placeholder="Password"
+                        id="password"
+                        name="password"
+                        className="form-control input-sm"
                       />
                     </div>
+                    {frm.errors.password && frm.touched.password ?
+                        (
+                          <div className="errorMessage">{frm.errors.password}</div>
+                        ) : (
+                          <div className="message"></div>
+                        )}
                   </div>
 
                   <div className="form-group">
@@ -145,53 +168,15 @@ const AddUserModal = (props: Props) => {
                         id="datepicker"
                         className="form-control"
                         placeholder="Phone number"
-
-                       
-                      />
+                      />                      
                     </div>
+                    {frm.errors.phoneNumber && frm.touched.phoneNumber ?
+                        (
+                          <div className="errorMessage">{frm.errors.phoneNumber}</div>
+                        ) : (
+                          <div className="message"></div>
+                        )}
                   </div>
-                  {/* <div className="form-group">
-                    <div className="input-group">
-                      <div className="input-group-prepend">
-                        <span className="input-group-text">
-                          <i className="fa fa-briefcase" />
-                        </span>
-                      </div>
-                      <select
-                        onChange={frm.handleChange}
-
-                      
-                        
-                        className="form-control"
-                        id="chucvu"
-                        name="maLoaiNguoiDung"
-                      >
-                        <option>Type</option>
-                        <option value="GV">Teacher</option>
-                        <option value="HV">Student</option>
-                      </select>
-                    </div>
-                  </div> */}
-                  {/* <div className="form-group">
-                    <div className="input-group">
-                      <div className="input-group-prepend">
-                        <span className="input-group-text">
-                          <i className="fa fa-briefcase" />
-                        </span>
-                      </div>
-                      <select
-                        onChange={frm.handleChange}
-                        
-                        className="form-control"
-                        id="maNhom"
-                        name="maNhom"
-                      >
-                        <option>Group</option>
-                        <option value="GP01">GP01</option>
-                        <option value="GP02">GP02</option>
-                      </select>
-                    </div>
-                  </div> */}
                 </div>
               </div>
               <div className="modal-footer">

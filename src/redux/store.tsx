@@ -5,6 +5,7 @@ import userReducder from "./reducers/userReducer";
 import IsLoadingReducer from "./reducers/IsLoadingReducer";
 import { quanLyProjectReducer } from "./quanLyProject/slice";
 import adminReducer from "./reducers/adminReducer";
+import projectReducer from "./reducers/projectReducer"
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     IsLoadingReducer: IsLoadingReducer,
     quanLyProject: quanLyProjectReducer,
     adminReducer: adminReducer,
+    projectReducer : projectReducer,
   },
 });
 
