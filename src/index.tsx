@@ -1,48 +1,43 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import {
-  unstable_HistoryRouter as HistoryRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
-import { createBrowserHistory, BrowserHistory } from "history";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './assets/css/style.css';
 
-import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { unstable_HistoryRouter as HistoryRouter, Routes, Route } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import { Provider } from 'react-redux';
+import Loading from './Components/Loading/Loading';
+import { store } from './Redux/configStore';
+import LoginTemplate from './Templates/LoginTemplate';
+import Login2 from './Pages/Login/Login2';
+import ProjectTemplate from './Templates/ProjectTemplate';
+import ProjectManagement from './Pages/ProjectManagement/ProjectManagement';
+import CreateProject from './Pages/CreateProject/CreateProject';
+import EditProjectDrawer from './Components/Drawer/EditProjectDrawer';
+import UserManagement from './Pages/UserManagement/UserManagement';
+import EditUser from './Components/Modal/EditUser';
+import Login from './Pages/Login/Login';
+export const history: any = createBrowserHistory();
 
-import "./App.css";
-
-import Login from "./pages/Login/Login";
-import "antd/dist/reset.css";
-// import SearchPage from './pages/SearchPage/SearchPage';
-import ReTemplate from "./templates/LoginTemplate/ReTemplate";
-import { PATH } from "./config/path";
-import ProjectManager from "./pages/ProjectManager";
-import MainLayout from "./layout/MainLayout";
-import "bootstrap/dist/css/bootstrap.min.css";
-import CreateProject from "./pages/CreateProject";
-import CreateTask from "./pages/CreateTask";
-import UserManager from "./pages/UserManager/UserManager";
-import Projectmanager from "./pages/ProjectManager/Projectmanager";
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement
 );
-
-export const history: BrowserHistory | any = createBrowserHistory();
-
 root.render(
   <Provider store={store}>
+    <Loading></Loading>
+    <EditProjectDrawer/>
+    <EditUser/>
     <HistoryRouter history={history}>
       <Routes>
-        <Route path="" element={<ReTemplate />}>
-          <Route index element={<Login />}></Route>
-        </Route>
-        <Route element={<MainLayout />}>
-          {/* <Route index path={PATH.projectmanagement} element={<ProjectManager />}></Route> */}
-          <Route index path="/projectmanagement" element={<Projectmanager/>}></Route>
-          <Route path={PATH.createproject} element={<CreateProject />}></Route>
-          <Route path={PATH.createtask} element={<CreateTask />}></Route>
-          <Route path="admin" element={<UserManager/>}></Route>
+        <Route>
+          <Route path='' element={<LoginTemplate/>}>
+            <Route index element={<Login2/>}></Route>
+            <Route path='/login' element={<Login2/>}></Route>
+          </Route>
+          <Route path='/project' element={<ProjectTemplate/>}>
+            <Route index element={<ProjectManagement/>}></Route>
+          </Route>
+          <Route path='/createproject' element={<CreateProject/>}></Route>
+          <Route path='/usermanagement' element={<UserManagement/>}></Route>
         </Route>
       </Routes>
     </HistoryRouter>
